@@ -7,7 +7,7 @@ import time
 bot = Bot(command_prefix="?")
 @bot.event
 async def on_ready():
-    await bot.change_presence(streaming=discord.Streaming(name="bsoyka code me"))
+    await bot.change_presence(game=discord.Game(name="Fortnite, which is bad"))
 @bot.command(pass_context=True)
 async def ping(ctx):
     """Sends a reply with the bot latency."""
