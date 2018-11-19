@@ -8,11 +8,13 @@ bot = Bot(command_prefix="?")
 @bot.event
 async def on_ready():
     await bot.change_presence(game=discord.Game(name="with fire"))
-@bot.command(pass_context=True)
-async def ping(ctx):
-    """Sends a reply with the bot latency."""
-    t = await bot.say('Pong!')
-    ms = (t.timestamp-ctx.message.timestamp).total_seconds() * 1000
-    await bot.edit_message(t, new_content='Pong! Took: {}ms'.format(int(ms)))
-    print(f'Ping {int(ping)}ms')
+class Maintenance:
+    @bot.command(pass_context=True)
+    async def ping(ctx):
+        """Sends a reply with the bot latency."""
+        t = await bot.say('Pong!')
+        ms = (t.timestamp-ctx.message.timestamp).total_seconds() * 1000
+        await bot.edit_message(t, new_content='Pong! Took: {}ms'.format(int(ms)))
+        print(f'Ping {int(ping)}ms')
+bot.add_cog(Maintenance)
 bot.run(os.getenv("TOKEN"))
