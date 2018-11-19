@@ -38,15 +38,5 @@ async def clear(ctx, amount=100):
     async for message in bot.logs_from(channel, limit=amount):
         messages.append(message)
     await bot.delete_messages(messages)
-@bot.command(pass_context=True)
-async def help(ctx):
-    author = ctx.message.author
-    embed = discord.Embed(
-        color: discord.Colour.orange()
-    )
-    embed.set_author(name="Help")
-    embed.add_field(name="?ping", value="Returns the bot latency.", inline=False)
-    embed.add_field(name="?punch (user)", value="Punches the specified user.", inline=False)
-    await bot.send_message(author, embed=embed)
 bot.loop.create_task(change_status())
 bot.run(os.getenv("TOKEN"))
