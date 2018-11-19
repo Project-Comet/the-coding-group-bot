@@ -15,4 +15,8 @@ async def ping(ctx):
     ms = (t.timestamp-ctx.message.timestamp).total_seconds() * 1000
     await bot.edit_message(t, new_content='Pong! Took: {}ms'.format(int(ms)))
     print(f'Ping {int(ping)}ms')
+@bot.command(pass_context=True)
+async def punch(ctx, user: discord.Member):
+    """Punches the specified user."""
+    await bot.say("Now punching {}" + user.mention)
 bot.run(os.getenv("TOKEN"))
