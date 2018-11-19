@@ -13,7 +13,7 @@ async def ping(ctx):
     """Sends a reply with the bot latency."""
     await bot.delete_message(ctx.message)
     before = time.monotonic()
-    message = await ctx.send("Pong!")
+    message = await bot.say("Pong!")
     ping = (time.monotonic() - before) * 1000
     await message.edit(content=f"Pong!  `{int(ping)}ms`")
     print(f'Ping {int(ping)}ms')
