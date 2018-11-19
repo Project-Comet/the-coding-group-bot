@@ -5,13 +5,13 @@ import asyncio
 import os
 import itertools
 bot = Bot(command_prefix="?")
-status_list = ["with fire", "the endless game of debugging", "tricks on your mind"]
+status_list = [("with fire", 1), ("the endless game of debugging", 1), ("tricks on your mind", 1), ("bsoyka code me", 3)]
 async def change_status():
     await bot.wait_until_ready()
     msgs = itertools.cycle(status_list)
     while not bot.is_closed:
         next_status = next(msgs)
-        await bot.change_presence(game=discord.Game(name=next_status, type=3))
+        await bot.change_presence(game=discord.Game(name=next_status[0], type=next_status[1]))
         await asyncio.sleep(10)
 @bot.event
 async def on_ready():
