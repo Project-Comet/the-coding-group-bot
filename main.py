@@ -7,7 +7,7 @@ import time
 bot = Bot(command_prefix="?")
 @bot.event
 async def on_ready():
-    await bot.change_presence(game=discord.Game(name=""))
+    await bot.change_presence(game=discord.Game(name="THIS IS A BETA"))
 @bot.command(pass_context=True)
 async def ping(ctx):
     """Sends a reply with the bot latency."""
