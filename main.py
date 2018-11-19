@@ -10,5 +10,5 @@ async def on_ready():
 @bot.command(pass_context=True)
 async def ping(ctx):
     """Sends a reply with the bot latency."""
-    await bot.say('Pong! {0}'.format(round(bot.latency, 1))
+    await ctx.send("Pong")
 bot.run(os.getenv("TOKEN"))
