@@ -20,8 +20,9 @@ async def punch(ctx, user: discord.Member):
     """Punches the specified user."""
     await bot.say("Now punching " + user.mention)
     await bot.send_message(user, "You've been punched!")
-@bot.command()
-async def suggest(*, msg: str):
-    channel=bot.get_channel('513579486608883724')
+@bot.command(pass_context=True)
+async def suggest(ctx, *, msg: str):
+    await bot.delete_message(ctx.message)
+    channel = bot.get_channel('513579486608883724')
     await bot.send_message(channel,msg)
 bot.run(os.getenv("TOKEN"))
