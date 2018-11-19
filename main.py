@@ -31,7 +31,7 @@ async def clear(ctx, amount=100):
     """Clear the specified number of messages, default 100 messages."""
     channel = ctx.message.channel
     messages = []
-    async for message in bot.logs_from(channel, limit=int(amount)):
+    async for message in bot.logs_from(channel, limit=int(amount) + 1):
         messages.append(message)
     await bot.delete_messages(messages)
 bot.run(os.getenv("TOKEN"))
