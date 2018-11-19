@@ -24,5 +24,8 @@ async def punch(ctx, user: discord.Member):
 async def suggest(ctx, *, msg: str):
     await bot.delete_message(ctx.message)
     channel = bot.get_channel('513579486608883724')
-    await bot.send_message(channel,msg)
+    embed = discord.Embed(title="Suggestion", description="A new suggestion just came in!", color=0x00ff00)
+    embed.add_field(name="User", value=ctx.user.mention, inline=False)
+    embed.add_field(name="Suggestion", value=msg, inline=False)
+    await client.send_message(channel, embed=embed)
 bot.run(os.getenv("TOKEN"))
