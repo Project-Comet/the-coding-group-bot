@@ -24,5 +24,5 @@ async def punch(ctx, user: discord.Member):
 async def suggest(ctx, *, msg: str):
     await bot.delete_message(ctx.message)
     channel = bot.get_channel('513579486608883724')
-    await client.send_message(channel, ctx.user.mention + " has just sent a suggestion: " + msg)
+    await client.send_message(channel, ctx.author.mention + " has just sent a suggestion: " + msg)
 bot.run(os.getenv("TOKEN"))
