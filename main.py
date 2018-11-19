@@ -11,8 +11,8 @@ async def change_status():
     msgs = itertools.cycle(status_list)
     while not bot.is_closed:
         next_status = next(msgs)
-        await bot.change_presence(game=discord.Game(name=next_status, type=1))
-        await asyncio.sleep(5)
+        await bot.change_presence(game=discord.Game(name=next_status, type=3))
+        await asyncio.sleep(10)
 @bot.event
 async def on_ready():
     pass
