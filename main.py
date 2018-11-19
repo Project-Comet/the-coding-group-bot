@@ -3,11 +3,18 @@ from discord.ext import commands
 from discord.ext.commands import Bot
 import asyncio
 import os
-import time
+import itertools
 bot = Bot(command_prefix="?")
+status_list = ["with fire", "the endless game of debugging", "tricks on your mind"]
+async def change_status():
+    await bot.wait_until_ready()
+    msgs = itertools.cycle(status_list)
+    while not bot.is_closed:
+        next_status = next(msgs)
+        await bot.change_presence(game=discord.Game(name=next_status, type=2))
 @bot.event
 async def on_ready():
-    await bot.change_presence(game=discord.Game(name="the endless game of debugging"))
+    pass
 @bot.command(pass_context=True)
 async def ping(ctx):
     """Sends a reply with the bot latency."""
