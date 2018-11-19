@@ -6,7 +6,7 @@ import os
 bot = Bot(command_prefix="?")
 @bot.event
 async def on_ready():
-    await bot.change_presence(game=discord.Game(name="tricks on your mind"))
+    await bot.change_presence(game=discord.Game(name="with fire"))
 @bot.command(pass_context=True)
 async def ping(ctx):
     """Sends a reply to show the bot is working."""
