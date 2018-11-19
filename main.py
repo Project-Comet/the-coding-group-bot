@@ -25,7 +25,7 @@ async def suggest(ctx, *, msg: str):
     """Sends a suggestion to the bot owner."""
     await bot.delete_message(ctx.message)
     channel = bot.get_channel('513579486608883724')
-    await client.send_message(channel, ctx.author.mention + " has just sent a suggestion: " + msg)
+    await client.send_message(channel, "**I have just received a suggestion:**\n" + msg)
 @bot.command(pass_context=True)
 async def clear(ctx, amount=100):
     channel = ctx.message.channel
