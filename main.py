@@ -11,10 +11,8 @@ async def on_ready():
 @bot.command(pass_context=True)
 async def ping(ctx):
     """Sends a reply with the bot latency."""
-    await bot.delete_message(ctx.message)
-    before = time.monotonic()
-    message = await bot.say("Pong!")
-    ping = (time.monotonic() - before) * 1000
-    await message.edit(content=f"Pong!  `{int(ping)}ms`")
+    t = await bot.say('Pong!')
+    ms = (t.timestamp-ctx.message.timestamp).total_seconds() * 1000
+    await bot.edit_message(t, new_content='Pong! Took: {}ms'.format(int(ms)))
     print(f'Ping {int(ping)}ms')
 bot.run(os.getenv("TOKEN"))
