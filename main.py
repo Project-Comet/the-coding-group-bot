@@ -28,6 +28,7 @@ async def suggest(ctx, *, msg: str):
     await client.send_message(channel, msg)
 @bot.command(pass_context=True)
 async def clear(ctx, amount=100):
+    """Clear the specified number of messages, default 100 messages."""
     channel = ctx.message.channel
     messages = []
     async for message in bot.logs_from(channel, limit=int(amount)):
