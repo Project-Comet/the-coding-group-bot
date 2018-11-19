@@ -21,12 +21,6 @@ async def punch(ctx, user: discord.Member):
     await bot.say("Now punching " + user.mention)
     await bot.send_message(user, "You've been punched!")
 @bot.command(pass_context=True)
-async def suggest(ctx, *, msg: str):
-    """Sends a suggestion to the bot owner."""
-    await bot.delete_message(ctx.message)
-    channel = bot.get_channel('513579486608883724')
-    await client.send_message(channel, msg)
-@bot.command(pass_context=True)
 async def clear(ctx, amount=100):
     """Clear the specified number of messages, default 100 messages."""
     channel = ctx.message.channel
