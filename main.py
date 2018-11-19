@@ -18,6 +18,9 @@ async def ping(ctx):
 @bot.command(pass_context=True)
 async def punch(ctx, user: discord.Member):
     """Punches the specified user."""
-    await bot.say("Now punching " + user.mention)
-    await bot.send_message(user, "You've been punched!")
+    if !user:
+        await bot.say("Now punching " + user.mention)
+        await bot.send_message(user, "You've been punched!")
+    else:
+        await bot.say("Please specify a user to punch.")
 bot.run(os.getenv("TOKEN"))
