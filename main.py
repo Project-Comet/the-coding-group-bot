@@ -38,5 +38,9 @@ async def clear(ctx, amount=100):
     async for message in bot.logs_from(channel, limit=amount):
         messages.append(message)
     await bot.delete_messages(messages)
+@clear.error
+async def clear_error(ctx, error):
+    if isinstance(error, commands.CheckFailure):
+        await ctx.send("{}, you do not have permission to use that command.".format(ctx.message.author.mention))
 bot.loop.create_task(change_status())
 bot.run(os.getenv("TOKEN"))
