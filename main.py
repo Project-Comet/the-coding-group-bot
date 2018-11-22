@@ -54,7 +54,9 @@ async def members(ctx):
 @bot.command()
 async def joke(pass_context=True):
     """Tell a joke."""
-    embed = discord.Embed(title="Dad Joke", description=random.choice(jokes)["body"])
+    joke = random.choice(jokes)
+    embed = discord.Embed(title="Dad Joke", description=joke["body"])
+    embed.set_footer(text="Joke #: " + str(joke["id"]))
     await bot.say(embed=embed)
 bot.loop.create_task(change_status())
 bot.run(os.getenv("TOKEN"))
