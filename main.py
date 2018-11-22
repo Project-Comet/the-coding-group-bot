@@ -27,15 +27,17 @@ async def ping(ctx):
     t = await bot.say('Pong!')
     ms = (t.timestamp-ctx.message.timestamp).total_seconds() * 1000
     await bot.delete_message(t)
-    embed=discord.Embed(title="Ping", description="Pong", color=0x149900)
+    embed = discord.Embed(title="Ping", description="Pong", color=0x149900)
     embed.add_field(name="Latency", value=str(int(ms)) + " ms", inline=False)
     await bot.say(embed=embed)
     print(f'Ping {int(ping)}ms')
 @bot.command(pass_context=True)
 async def punch(ctx, user: discord.Member):
     """Punches the specified user."""
-    await bot.say("Now punching " + user.mention)
-    await bot.send_message(user, "You've been punched!")
+    embed = discord.Embed(title="Now Punching", description=user.mention, color=0x149900)
+    await bot.say(embed=embed)
+    embed_2 = discord.Embed(title="You've been punched!", color=0x149900)
+    await bot.send_message(user, embed=embed_2)
 @bot.command(pass_context=True)
 @commands.has_permissions(administrator=True, manage_messages=True)
 async def clear(ctx, amount=100):
@@ -65,7 +67,7 @@ async def joke(ctx):
 @bot.command(pass_context=True)
 async def help(ctx):
     """Show help."""
-    embed=discord.Embed(title="Help", description="These are the commands you can use.", color=0x149900)
+    embed = discord.Embed(title="Help", description="These are the commands you can use.", color=0x149900)
     embed.add_field(name="?help", value="Show this message.", inline=False)
     embed.add_field(name="?ping", value="Send the bot latency.", inline=False)
     embed.add_field(name="?punch (user)", value="DM punch the user.", inline=False)
