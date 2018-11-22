@@ -4,6 +4,7 @@ from discord.ext.commands import Bot
 import asyncio
 import os
 import itertools
+import requests
 bot = Bot(command_prefix="?")
 status_list = [("with fire", 0), ("the endless game of debugging", 0), ("cat videos on YouTube", 3), ("tricks on your mind", 0), ("my code being written", 3), ("the screams of children", 2)]
 async def change_status():
@@ -47,6 +48,10 @@ async def members(ctx):
     """Return the server member count."""
     embed = discord.Embed(title="Member Count", description=str(len(ctx.message.server.members)))
     await bot.say(embed=embed)
-    # await bot.say("Member count: " + str(len(ctx.message.server.members)))
+@bot.command()
+async def dadjoke():
+    """Return the server member count."""
+    embed = discord.Embed(title="Dad Joke", description=requests.get("https://icanhazdadjoke.com/").text)
+    await bot.say(embed=embed)
 bot.loop.create_task(change_status())
 bot.run(os.getenv("TOKEN"))
