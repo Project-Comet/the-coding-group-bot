@@ -25,7 +25,10 @@ async def ping(ctx):
     """Sends a reply with the bot latency."""
     t = await bot.say('Pong!')
     ms = (t.timestamp-ctx.message.timestamp).total_seconds() * 1000
-    await bot.edit_message(t, new_content='Pong! Took: {}ms'.format(int(ms)))
+    await bot.delete_message(t)
+    embed=discord.Embed(title="Ping", description="Pong", color=0x149900)
+    embed.add_field(name="Latency", value=str(int(ms)) + " ms", inline=False)
+    await bot.say(embed=embed)
     print(f'Ping {int(ping)}ms')
 @bot.command(pass_context=True)
 async def punch(ctx, user: discord.Member):
@@ -49,13 +52,13 @@ async def clear_error(ctx, error):
 @bot.command(pass_context=True)
 async def members(ctx):
     """Return the server member count."""
-    embed = discord.Embed(title="Member Count", description=str(len(ctx.message.server.members)))
+    embed = discord.Embed(title="Member Count", description=str(len(ctx.message.server.members)), color=0x149900)
     await bot.say(embed=embed)
 @bot.command()
 async def joke(pass_context=True):
     """Tell a joke."""
     joke = random.choice(jokes)
-    embed = discord.Embed(title="Dad Joke", description=joke["body"])
+    embed = discord.Embed(title="Dad Joke", description=joke["body"], color=0x149900)
     embed.set_footer(text="Joke #: " + str(joke["id"]))
     await bot.say(embed=embed)
 bot.loop.create_task(change_status())
