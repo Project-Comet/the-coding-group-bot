@@ -25,7 +25,10 @@ async def ping(ctx):
     """Sends a reply with the bot latency."""
     t = await bot.say('Pong!')
     ms = (t.timestamp-ctx.message.timestamp).total_seconds() * 1000
-    await bot.edit_message(t, new_content='Pong! Took: {}ms'.format(int(ms)))
+    await bot.delete_message(t, new_content='Pong! Took: {}ms'.format(int(ms)))
+    embed=discord.Embed(title="Ping", description="Pong", color=0x149900)
+    embed.add_field(name="Latency", value=str(int(ms)) + " ms", inline=False)
+    await bot.say(embed=embed)
     print(f'Ping {int(ping)}ms')
 @bot.command(pass_context=True)
 async def punch(ctx, user: discord.Member):
