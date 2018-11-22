@@ -5,7 +5,7 @@ import asyncio
 import os
 import itertools
 bot = Bot(command_prefix="?")
-status_list = [("with fire", 0), ("the endless game of debugging", 0), ("cat videos on YouTube", 3), ("tricks on your mind", 0), ("my code being written", 3), ("to the screams of children", 1)]
+status_list = [("with fire", 0), ("the endless game of debugging", 0), ("cat videos on YouTube", 3), ("tricks on your mind", 0), ("my code being written", 3), ("to the screams of children", 2)]
 async def change_status():
     await bot.wait_until_ready()
     msgs = itertools.cycle(status_list)
