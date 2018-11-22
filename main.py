@@ -45,6 +45,6 @@ async def clear_error(ctx, error):
 @bot.command(pass_context=True)
 async def members(ctx):
     """Return the server member count."""
-    await bot.say("Member count: " + ctx.message.server.member_count)
+    await bot.say("Member count: " + len(ctx.message.server.members))
 bot.loop.create_task(change_status())
 bot.run(os.getenv("TOKEN"))
