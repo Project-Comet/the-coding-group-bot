@@ -7,7 +7,7 @@ import itertools
 import random
 import json
 with open("jokes.json") as file:
-    jokes = json.load(file).items()
+    jokes = json.load(file)
 bot = Bot(command_prefix="?")
 bot.remove_command("help")
 status_list = [("with fire", 0), ("the endless game of debugging", 0), ("cat videos on YouTube", 3), ("tricks on your mind", 0), ("my code being written", 3), ("the screams of children", 2)]
@@ -61,8 +61,8 @@ async def members(ctx):
 async def joke(ctx):
     """Tell a joke."""
     joke = random.choice(jokes)
-    embed = discord.Embed(title="Joke", description=joke[1], color=0x149900)
-    embed.set_footer(text="Joke #: " + str(joke[0]))
+    embed = discord.Embed(title="Joke", description=joke["body"], color=0x149900)
+    embed.set_footer(text="Joke #: " + str(joke["id"]))
     await bot.say(embed=embed)
 @bot.command(pass_context=True)
 async def help(ctx):
