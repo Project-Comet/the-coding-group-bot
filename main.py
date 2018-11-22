@@ -45,6 +45,8 @@ async def clear_error(ctx, error):
 @bot.command(pass_context=True)
 async def members(ctx):
     """Return the server member count."""
-    await bot.say("Member count: " + str(len(ctx.message.server.members)))
+    embed = discord.Embed(title="Member Count", description=str(len(ctx.message.server.members)))
+    await bot.say(embed=embed)
+    # await bot.say("Member count: " + str(len(ctx.message.server.members)))
 bot.loop.create_task(change_status())
 bot.run(os.getenv("TOKEN"))
