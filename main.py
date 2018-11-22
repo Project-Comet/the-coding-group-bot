@@ -49,13 +49,13 @@ async def clear_error(ctx, error):
 @bot.command(pass_context=True)
 async def members(ctx):
     """Return the server member count."""
-    embed = discord.Embed(title="Member Count", description=str(len(ctx.message.server.members)))
+    embed = discord.Embed(title="Member Count", description=str(len(ctx.message.server.members)), color=0x149900)
     await bot.say(embed=embed)
 @bot.command()
 async def joke(pass_context=True):
     """Tell a joke."""
     joke = random.choice(jokes)
-    embed = discord.Embed(title="Dad Joke", description=joke["body"])
+    embed = discord.Embed(title="Dad Joke", description=joke["body"], color=0x149900)
     embed.set_footer(text="Joke #: " + str(joke["id"]))
     await bot.say(embed=embed)
 bot.loop.create_task(change_status())
