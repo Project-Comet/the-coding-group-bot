@@ -9,6 +9,7 @@ import json
 with open("jokes.json") as file:
     jokes = json.load(file)
 bot = Bot(command_prefix="?")
+bot.remove_command("help")
 status_list = [("with fire", 0), ("the endless game of debugging", 0), ("cat videos on YouTube", 3), ("tricks on your mind", 0), ("my code being written", 3), ("the screams of children", 2)]
 async def change_status():
     await bot.wait_until_ready()
@@ -54,12 +55,23 @@ async def members(ctx):
     """Return the server member count."""
     embed = discord.Embed(title="Member Count", description=str(len(ctx.message.server.members)), color=0x149900)
     await bot.say(embed=embed)
-@bot.command()
-async def joke(pass_context=True):
+@bot.command(pass_context=True)
+async def joke(ctx):
     """Tell a joke."""
     joke = random.choice(jokes)
     embed = discord.Embed(title="Dad Joke", description=joke["body"], color=0x149900)
     embed.set_footer(text="Joke #: " + str(joke["id"]))
+    await bot.say(embed=embed)
+@bot.command(pass_context=True)
+async def help(ctx):
+    """Show help."""
+    embed=discord.Embed(title="Help", description="These are the commands you can use.", color=0x149900)
+    embed.add_field(name="?help", value="Show this message.", inline=False)
+    embed.add_field(name="?ping", value="Send the bot latency.", inline=False)
+    embed.add_field(name="?punch (user)", value="DM punch the user.", inline=False)
+    embed.add_field(name="?clear (limit)", value="Clear the specified number of messages.", inline=False)
+    embed.add_field(name="?members", value="Send the server member count.", inline=False)
+    embed.add_field(name="?joke", value="Send a joke.", inline=False)
     await bot.say(embed=embed)
 bot.loop.create_task(change_status())
 bot.run(os.getenv("TOKEN"))
