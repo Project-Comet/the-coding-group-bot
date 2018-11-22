@@ -36,7 +36,7 @@ async def punch(ctx, user: discord.Member):
     """Punches the specified user."""
     embed = discord.Embed(title="Now Punching", description=user.mention, color=0x149900)
     await bot.say(embed=embed)
-    embed_2 = discord.Embed(title="You've been punched!", color=0x149900)
+    embed_2 = discord.Embed(title="You've been punched!", description="By " + ctx.message.author.name, color=0x149900)
     await bot.send_message(user, embed=embed_2)
 @bot.command(pass_context=True)
 @commands.has_permissions(administrator=True, manage_messages=True)
