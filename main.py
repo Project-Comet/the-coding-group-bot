@@ -7,7 +7,7 @@ import itertools
 import random
 import json
 with open("jokes.json") as file:
-    jokes = json.dump(file)
+    jokes = json.load(file)
 bot = Bot(command_prefix="?")
 status_list = [("with fire", 0), ("the endless game of debugging", 0), ("cat videos on YouTube", 3), ("tricks on your mind", 0), ("my code being written", 3), ("the screams of children", 2)]
 async def change_status():
