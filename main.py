@@ -79,8 +79,9 @@ async def dm(ctx, user: discord.Member, *, msg: str):
         embed_2.set_footer(text=ctx.message.author.name)
         await bot.send_message(user, embed=embed_2)
     else:
-        embed = discord.Embed(title="Error", description="You do not have permission to use that command.", color=0x990000)
+        embed = discord.Embed(title="Error", description="You do not have permission to use that command, {}.".format(ctx.message.author.name), color=0x990000)
         await bot.say(embed=embed)
+    await bot.delete_message(ctx.message)
 @bot.command(pass_context=True)
 async def help(ctx):
     """Show help."""
