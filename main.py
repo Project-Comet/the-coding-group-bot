@@ -68,7 +68,7 @@ async def joke(ctx):
 @bot.command(pass_context=True)
 async def dm(ctx, user: discord.Member, *, msg: str):
     """Sends a DM message to the specified user."""
-    if ctx.message.author in authorized_users:
+    if ctx.message.author.id in authorized_users:
         embed = discord.Embed(title="Now sending message", description=msg, color=0x149900)
         embed.set_footer(text=user.name)
         await bot.say(embed=embed)
@@ -76,7 +76,7 @@ async def dm(ctx, user: discord.Member, *, msg: str):
         embed_2.set_footer(text=ctx.message.author.name)
         await bot.send_message(user, embed=embed_2)
     else:
-        embed = discord.Embed(title="Error", description="You do not have permission to use that command.")
+        embed = discord.Embed(title="Error", description="You do not have permission to use that command.", color=0x990000)
         await bot.say(embed=embed)
 @bot.command(pass_context=True)
 async def help(ctx):
