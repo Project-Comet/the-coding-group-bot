@@ -6,6 +6,7 @@ import os
 import itertools
 import random
 import json
+authorized_users = ["466677474672246795"]
 with open("jokes.json") as file:
     jokes = json.load(file)
 bot = Bot(command_prefix="?")
@@ -67,12 +68,16 @@ async def joke(ctx):
 @bot.command(pass_context=True)
 async def dm(ctx, user: discord.Member, *, msg: str):
     """Sends a DM message to the specified user."""
-    embed = discord.Embed(title="Now sending message", description=msg, color=0x149900)
-    embed.set_footer(text=user.name)
-    await bot.say(embed=embed)
-    embed_2 = discord.Embed(title="You've received a message!", description=msg, color=0x149900)
-    embed_2.set_footer(text=ctx.message.author.name)
-    await bot.send_message(user, embed=embed_2)
+    if ctx.message.author in authorized_users:
+        embed = discord.Embed(title="Now sending message", description=msg, color=0x149900)
+        embed.set_footer(text=user.name)
+        await bot.say(embed=embed)
+        embed_2 = discord.Embed(title="You've received a message!", description=msg, color=0x149900)
+        embed_2.set_footer(text=ctx.message.author.name)
+        await bot.send_message(user, embed=embed_2)
+    else:
+        embed = discord.Embed(title="Error", description="You do not have permission to use that command.")
+        await bot.say(embed=embed)
 @bot.command(pass_context=True)
 async def help(ctx):
     """Show help."""
