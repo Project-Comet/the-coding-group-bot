@@ -68,10 +68,10 @@ async def joke(ctx):
 async def dm(ctx, user: discord.Member, *, msg: str):
     """Sends a DM message to the specified user."""
     embed = discord.Embed(title="Now sending message", description=msg, color=0x149900)
-    embed.set_footer(text=user.mention)
+    embed.set_footer(text=user.name)
     await bot.say(embed=embed)
     embed_2 = discord.Embed(title="You've received a message!", description=msg, color=0x149900)
-    embed_2.set_footer(text=user.mention)
+    embed_2.set_footer(text=ctx.message.author.name)
     await bot.send_message(user, embed=embed_2)
 @bot.command(pass_context=True)
 async def help(ctx):
