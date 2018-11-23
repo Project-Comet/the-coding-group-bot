@@ -6,7 +6,10 @@ import os
 import itertools
 import random
 import json
-authorized_users = ["466677474672246795"]
+authorized_users = [
+    "466677474672246795", # bsoyka#7570
+    "210593330101354496"  # joshy#9000
+]
 with open("jokes.json") as file:
     jokes = json.load(file)
 bot = Bot(command_prefix="?")
