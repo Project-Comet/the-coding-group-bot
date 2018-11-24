@@ -32,6 +32,13 @@ async def on_member_join(member):
     embed.set_footer(text="New Member Count: " + str(len(member.server.members)))
     channel = discord.utils.get(member.server.channels, name="【🚗】traffic")
     await bot.send_message(channel, embed=embed)
+@bot.event
+async def on_member_remove(member):
+    welcome_embed_description = "{} just left. :cry:".format(member.mention)
+    embed = discord.Embed(title="Member Left", description=welcome_embed_description, color=0x990000)
+    embed.set_footer(text="New Member Count: " + str(len(member.server.members)))
+    channel = discord.utils.get(member.server.channels, name="【🚗】traffic")
+    await bot.send_message(channel, embed=embed)
 @bot.command(pass_context=True)
 async def ping(ctx):
     """Sends a reply with the bot latency."""
