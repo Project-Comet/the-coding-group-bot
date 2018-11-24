@@ -33,7 +33,7 @@ async def on_member_join(member):
     channel = discord.utils.get(member.server.channels, name="【🚗】traffic")
     await bot.send_message(channel, embed=embed)
 @bot.event
-async def on_member_leave(member):
+async def on_member_remove(member):
     welcome_embed_description = "{} just left. :cry:".format(member.mention)
     embed = discord.Embed(title="Member Left", description=welcome_embed_description, color=0x990000)
     embed.set_footer(text="New Member Count: " + str(len(member.server.members)))
