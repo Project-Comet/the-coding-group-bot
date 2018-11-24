@@ -25,6 +25,13 @@ async def change_status():
 @bot.event
 async def on_ready():
     pass
+@bot.event
+async def on_member_join(member):
+    welcome_embed_description = "Welcome to **The Coding Group**, {}!  We hope you enjoy your time here!".format(member.mention)
+    embed = discord.Embed(title="New Member", description=welcome_embed_description, color=0x149900)
+    embed.set_footer(text="New Member Count: " + str(len(member.server.members)))
+    channel = discord.utils.get(member.server.channels, name="【🚗】traffic")
+    await bot.send_message(channel, embed=embed)
 @bot.command(pass_context=True)
 async def ping(ctx):
     """Sends a reply with the bot latency."""
