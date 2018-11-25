@@ -98,8 +98,10 @@ async def dm(ctx, user: discord.Member, *, msg: str):
     await bot.delete_message(ctx.message)
 @bot.command(pass_context=True)
 async def suggest(ctx, *, msg: str):
+    user_formatted = ctx.message.author.name + "#" + ctx.message.author.discriminator
     channel = discord.utils.get(ctx.message.server.channels, name="suggestions")
     embed = discord.Embed(title="New Suggestion", description=msg, color=0x149900)
+    embed.set_author(name=user_formatted, icon_url=ctx.message.author.avatar_url)
     await bot.send_message(channel, embed=embed)
 @bot.command(pass_context=True)
 async def help(ctx):
