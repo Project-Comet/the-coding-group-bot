@@ -103,6 +103,9 @@ async def suggest(ctx, *, msg: str):
     embed = discord.Embed(title="New Suggestion", description=msg, color=0x149900)
     embed.set_author(name=user_formatted, icon_url=ctx.message.author.avatar_url)
     await bot.send_message(channel, embed=embed)
+    embed_2 = discord.Embed(title="Success", description="Your suggestion has been sent.", color=0x149900)
+    await bot.send_message(ctx.message.channel, embed=embed_2)
+    await bot.delete_message(ctx.message)
 @bot.command(pass_context=True)
 async def help(ctx):
     """Show help."""
