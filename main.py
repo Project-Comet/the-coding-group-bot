@@ -97,6 +97,18 @@ async def dm(ctx, user: discord.Member, *, msg: str):
         await bot.say(embed=embed)
     await bot.delete_message(ctx.message)
 @bot.command(pass_context=True)
+async def suggest(ctx, *, msg: str):
+    user_formatted = ctx.message.author.name + "#" + ctx.message.author.discriminator
+    channel = discord.utils.get(ctx.message.server.channels, name="suggestions")
+    embed = discord.Embed(title="New Suggestion", description=msg, color=0x149900)
+    embed.set_author(name=user_formatted, icon_url=ctx.message.author.avatar_url)
+    embed_message = await bot.send_message(channel, embed=embed)
+    await bot.add_reaction(embed_message, '👍')
+    await bot.add_reaction(embed_message, '👎')
+    embed_2 = discord.Embed(title="Success", description="Your suggestion has been sent.", color=0x149900)
+    await bot.send_message(ctx.message.channel, embed=embed_2)
+    await bot.delete_message(ctx.message)
+@bot.command(pass_context=True)
 async def help(ctx):
     """Show help."""
     embed = discord.Embed(title="Help", description="These are the commands you can use.", color=0x149900)
@@ -106,6 +118,7 @@ async def help(ctx):
     embed.add_field(name="?clear (limit)", value="Clear the specified number of messages.", inline=False)
     embed.add_field(name="?members", value="Send the server member count.", inline=False)
     embed.add_field(name="?joke", value="Send a joke.", inline=False)
+    embed.add_field(name="?suggest (suggestion)", value="Sends a suggestion to the server staff.", inline=False)
     await bot.say(embed=embed)
 bot.loop.create_task(change_status())
 bot.run(os.getenv("TOKEN"))
