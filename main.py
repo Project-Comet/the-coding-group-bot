@@ -102,7 +102,7 @@ async def suggest(ctx, *, msg: str):
     channel = discord.utils.get(ctx.message.server.channels, name="suggestions")
     embed = discord.Embed(title="New Suggestion", description=msg, color=0x149900)
     embed.set_author(name=user_formatted, icon_url=ctx.message.author.avatar_url)
-    embed_message = await bot.send_message(channel, embed=embed)
+    await embed_message = bot.send_message(channel, embed=embed)
     await embed_message.add_reaction('\U0001F44D')
     await embed_message.add_reaction('\U0001F44E')
     embed_2 = discord.Embed(title="Success", description="Your suggestion has been sent.", color=0x149900)
