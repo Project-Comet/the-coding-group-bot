@@ -118,6 +118,7 @@ async def help(ctx):
     embed.add_field(name="?clear (limit)", value="Clear the specified number of messages.", inline=False)
     embed.add_field(name="?members", value="Send the server member count.", inline=False)
     embed.add_field(name="?joke", value="Send a joke.", inline=False)
+    embed.add_field(name="?suggest (suggestion)", value="Sends a suggestion to the server staff.", inline=False)
     await bot.say(embed=embed)
 bot.loop.create_task(change_status())
 bot.run(os.getenv("TOKEN"))
