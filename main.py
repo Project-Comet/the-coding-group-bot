@@ -39,6 +39,24 @@ async def on_member_remove(member):
     embed.set_footer(text="New Member Count: " + str(len(member.server.members)))
     channel = discord.utils.get(member.server.channels, name="【🚗】traffic")
     await bot.send_message(channel, embed=embed)
+@bot.command(pass_context = True)
+async def ban(member: discord.Member, days: int = 1):
+    if ctx.message.author.server_permissions.ban_members:
+        await bot.ban(member, days)
+    else:
+        await bot.send_message(ctx.message.channel, "You do not have permission to use that command.".format(ctx.message.author.mention))
+@bot.command(pass_context = True)
+async def unban(member: discord.Member):
+    if ctx.message.author.server_permissions.ban_members:
+        await bot.unban(member)
+    else:
+        await bot.send_message(ctx.message.channel, "You do not have permission to use that command.".format(ctx.message.author.mention))
+@bot.command(pass_context = True)
+async def kick(member: discord.Member):
+    if ctx.message.author.server_permissions.kick_members:
+        await bot.kick(member)
+    else:
+        await bot.send_message(ctx.message.channel, "You do not have permission to use that command.".format(ctx.message.author.mention))
 @bot.command(pass_context=True)
 async def ping(ctx):
     """Sends a reply with the bot latency."""
