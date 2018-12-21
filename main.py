@@ -46,10 +46,30 @@ async def ban(ctx, member: discord.Member, days: int = 1):
     else:
         embed = discord.Embed(title="Error", description="You do not have permission to use that command, {}.".format(ctx.message.author.name), color=0x990000)
         await bot.say(embed=embed)
-@bot.command(pass_context = True)
-async def unban(ctx, member: discord.User):
+@bot.command(pass_context=True)
+async def unban(ctx, *, member):
     if ctx.message.author.id in authorized_users:
-        await bot.unban(ctx.message.server, member)
+        server = ctx.message.server
+        bans = await bot.get_bans(server)
+        try:
+            # First we'll try matching with the exact user id
+            uid = int(member)
+            matches = list(filter(lambda u: u.id == uid, bans))
+            if not matches:
+                return await bot.say('no users ids matched with %s' % uid)
+            _member = matches[0]
+        except ValueError:
+            # If the provided string isn't an id we'll try to get an exact match on a user from the bans list
+            # The member string needs to be exactly the same as the users name + discrim combo like this Testuser#7777
+            matches = list(filter(lambda u: str(u) == member, bans))
+            if not matches:
+                return await bot.say('no users matched with %s' % member)
+            _member = matches[0]
+        try:
+            await bot.unban(ctx.message.server, _member )
+        except:
+            embed = discord.Embed(title="Error", description="User not found.", color=0x990000)
+            await bot.say(embed=embed)
     else:
         embed = discord.Embed(title="Error", description="You do not have permission to use that command, {}.".format(ctx.message.author.name), color=0x990000)
         await bot.say(embed=embed)
