@@ -69,14 +69,10 @@ async def unban(ctx, *, member):
             if not matches:
                 return await bot.say('no users matched with %s' % member)
             _member = matches[0]
-        try:
-            await bot.unban(ctx.message.server, _member)
-            embed = discord.Embed(title="Unban", description="Successful", color=0x149900)
-            embed.add_field(name="User", value=member.id, inline=False)
-            await bot.say(embed=embed)
-        except:
-            embed = discord.Embed(title="Error", description="User not found.", color=0x990000)
-            await bot.say(embed=embed)
+        await bot.unban(ctx.message.server, _member)
+        embed = discord.Embed(title="Unban", description="Successful", color=0x149900)
+        embed.add_field(name="User", value=member.id, inline=False)
+        await bot.say(embed=embed)
     else:
         embed = discord.Embed(title="Error", description="You do not have permission to use that command, {}.".format(ctx.message.author.name), color=0x990000)
         await bot.say(embed=embed)
