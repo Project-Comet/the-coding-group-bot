@@ -56,7 +56,7 @@ async def unban(ctx, *, member):
         bans = await bot.get_bans(server)
         try:
             # First we'll try matching with the exact user id
-            uid = int(member)
+            uid = str(member)
             matches = list(filter(lambda u: u.id == uid, bans))
             if not matches:
                 return await bot.say('no users ids matched with %s' % uid)
