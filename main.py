@@ -44,19 +44,22 @@ async def ban(member: discord.Member, days: int = 1):
     if ctx.message.author.id in authorized_users:
         await bot.ban(member, days)
     else:
-        await bot.send_message(ctx.message.channel, "You do not have permission to use that command.".format(ctx.message.author.mention))
+        embed = discord.Embed(title="Error", description="You do not have permission to use that command, {}.".format(ctx.message.author.name), color=0x990000)
+        await bot.say(embed=embed)
 @bot.command(pass_context = True)
-async def unban(member: discord.Member):
+async def unban(member: discord.User):
     if ctx.message.author.id in authorized_users:
-        await bot.unban(member)
+        await bot.unban(ctx.message.server, member)
     else:
-        await bot.send_message(ctx.message.channel, "You do not have permission to use that command.".format(ctx.message.author.mention))
+        embed = discord.Embed(title="Error", description="You do not have permission to use that command, {}.".format(ctx.message.author.name), color=0x990000)
+        await bot.say(embed=embed)
 @bot.command(pass_context = True)
 async def kick(member: discord.Member):
     if ctx.message.author.id in authorized_users:
         await bot.kick(member)
     else:
-        await bot.send_message(ctx.message.channel, "You do not have permission to use that command.".format(ctx.message.author.mention))
+        embed = discord.Embed(title="Error", description="You do not have permission to use that command, {}.".format(ctx.message.author.name), color=0x990000)
+        await bot.say(embed=embed)
 @bot.command(pass_context=True)
 async def ping(ctx):
     """Sends a reply with the bot latency."""
