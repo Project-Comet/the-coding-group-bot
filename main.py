@@ -40,6 +40,28 @@ async def on_member_remove(member):
     channel = discord.utils.get(member.server.channels, name="【🚗】traffic")
     await bot.send_message(channel, embed=embed)
 @bot.command(pass_context = True)
+async def mute(ctx, member: discord.Member):
+    if ctx.message.author.id in authorized_users:
+        role = discord.utils.get(member.server.roles, name="Muted")
+        await client.add_roles(user, role)
+        embed = discord.Embed(title="Mute", description="Successful", color=0x149900)
+        embed.add_field(name="User", value=member.id, inline=False)
+        await bot.say(embed=embed)
+    else:
+        embed = discord.Embed(title="Error", description="You do not have permission to use that command, {}.".format(ctx.message.author.name), color=0x990000)
+        await bot.say(embed=embed)
+@bot.command(pass_context = True)
+async def unmute(ctx, member: discord.Member):
+    if ctx.message.author.id in authorized_users:
+        role = discord.utils.get(member.server.roles, name="Muted")
+        await client.remove_roles(user, role)
+        embed = discord.Embed(title="Unmute", description="Successful", color=0x149900)
+        embed.add_field(name="User", value=member.id, inline=False)
+        await bot.say(embed=embed)
+    else:
+        embed = discord.Embed(title="Error", description="You do not have permission to use that command, {}.".format(ctx.message.author.name), color=0x990000)
+        await bot.say(embed=embed)
+@bot.command(pass_context = True)
 async def ban(ctx, member: discord.Member, days: int = 1):
     if ctx.message.author.id in authorized_users:
         await bot.ban(member, days)
