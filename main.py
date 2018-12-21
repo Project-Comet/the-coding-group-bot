@@ -43,6 +43,9 @@ async def on_member_remove(member):
 async def ban(ctx, member: discord.Member, days: int = 1):
     if ctx.message.author.id in authorized_users:
         await bot.ban(member, days)
+        embed = discord.Embed(title="Ban", description="Successful", color=0x149900)
+        embed.add_field(name="User", value=member.id, inline=False)
+        await bot.say(embed=embed)
     else:
         embed = discord.Embed(title="Error", description="You do not have permission to use that command, {}.".format(ctx.message.author.name), color=0x990000)
         await bot.say(embed=embed)
@@ -66,7 +69,10 @@ async def unban(ctx, *, member):
                 return await bot.say('no users matched with %s' % member)
             _member = matches[0]
         try:
-            await bot.unban(ctx.message.server, _member )
+            await bot.unban(ctx.message.server, _member)
+            embed = discord.Embed(title="Unban", description="Successful", color=0x149900)
+            embed.add_field(name="User", value=member.id, inline=False)
+            await bot.say(embed=embed)
         except:
             embed = discord.Embed(title="Error", description="User not found.", color=0x990000)
             await bot.say(embed=embed)
@@ -77,6 +83,9 @@ async def unban(ctx, *, member):
 async def kick(ctx, member: discord.Member):
     if ctx.message.author.id in authorized_users:
         await bot.kick(member)
+        embed = discord.Embed(title="Kick", description="Successful", color=0x149900)
+        embed.add_field(name="User", value=member.id, inline=False)
+        await bot.say(embed=embed)
     else:
         embed = discord.Embed(title="Error", description="You do not have permission to use that command, {}.".format(ctx.message.author.name), color=0x990000)
         await bot.say(embed=embed)
