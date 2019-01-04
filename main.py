@@ -32,6 +32,8 @@ async def on_member_join(member):
     embed.set_footer(text="New Member Count: " + str(len(member.server.members)))
     channel = discord.utils.get(member.server.channels, name="【🚗】traffic")
     await bot.send_message(channel, embed=embed)
+    embed = discord.Embed(title="Welcome!", description="Please make sure to verify yourself in the 'verify' channel.", color=0x149900)
+    await bot.send_message(member, embed=embed)
 @bot.event
 async def on_member_remove(member):
     welcome_embed_description = "{} just left. :cry:".format(member.mention)
