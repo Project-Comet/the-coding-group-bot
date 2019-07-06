@@ -7,8 +7,8 @@ import itertools
 import random
 import json
 authorized_users = [
-    "466677474672246795", # bsoyka#7570
-    "210593330101354496"  # joshy#9000
+    "332492309637758977", # owner
+    "210593330101354496"  # owner
 ]
 with open("jokes.json") as file:
     jokes = json.load(file)
