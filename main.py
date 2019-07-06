@@ -12,25 +12,25 @@ authorized_users = [
 ]
 with open("jokes.json") as file:
     jokes = json.load(file)
-bot = Bot(command_prefix="?")
+bot = Bot(command_prefix="y!")
 bot.remove_command("help")
-status_list = [("with fire", 0), ("the endless game of debugging", 0), ("cat videos on YouTube", 3), ("tricks on your mind", 0), ("my code being written", 3), ("the screams of children", 2), ("with your children", 0), ("your wife screaming", 2)]
+status_list = [("with users", 0), ("debugging...", 0), ("Someone code me", 3), ("with my code", 0), ("Coding...", 3), ("the user", 2), ("with commands", 0), ("for user to sdd me", 2)]
 async def change_status():
     await bot.wait_until_ready()
     msgs = itertools.cycle(status_list)
     while not bot.is_closed:
         next_status = next(msgs)
-        await bot.change_presence(game=discord.Game(name=next_status[0], type=next_status[1]))
+        await bot.change_presence(game=discord.Game(name=next.status[0], type=next_status[1]))
         await asyncio.sleep(10)
 @bot.event
 async def on_ready():
     pass
 @bot.event
 async def on_member_join(member):
-    welcome_embed_description = "Welcome to **The Coding Group**, {}!  We hope you enjoy your time here!".format(member.mention)
+    welcome_embed_description = "Welcome to Our Server, {}!  We hope you enjoy your time here!".format(member.mention)
     embed = discord.Embed(title="New Member", description=welcome_embed_description, color=0x149900)
     embed.set_footer(text="New Member Count: " + str(len(member.server.members)))
-    channel = discord.utils.get(member.server.channels, name="【🚗】traffic")
+    channel = discord.utils.get(member.server.channels, name="welcome-leave")
     await bot.send_message(channel, embed=embed)
     embed = discord.Embed(title="Welcome!", description="Please make sure to verify yourself in the 'verify' channel.", color=0x149900)
     await bot.send_message(member, embed=embed)
@@ -39,7 +39,7 @@ async def on_member_remove(member):
     welcome_embed_description = "{} just left. :cry:".format(member.mention)
     embed = discord.Embed(title="Member Left", description=welcome_embed_description, color=0x990000)
     embed.set_footer(text="New Member Count: " + str(len(member.server.members)))
-    channel = discord.utils.get(member.server.channels, name="【🚗】traffic")
+    channel = discord.utils.get(member.server.channels, name="welcome-leave")
     await bot.send_message(channel, embed=embed)
 @bot.command(pass_context = True)
 async def mute(ctx, member: discord.Member):
@@ -183,16 +183,16 @@ async def suggest(ctx, *, msg: str):
 async def help(ctx):
     """Show help."""
     embed = discord.Embed(title="Help", description="These are the commands you can use.", color=0x149900)
-    embed.add_field(name="?help", value="Show this message.", inline=False)
-    embed.add_field(name="?ping", value="Send the bot latency.", inline=False)
-    embed.add_field(name="?punch (user)", value="DM punch the user.", inline=False)
-    embed.add_field(name="?clear (limit)", value="Clear the specified number of messages.", inline=False)
+    embed.add_field(name="y!help", value="Show this message.", inline=False)
+    embed.add_field(name="y!ping", value="Send the bot latency.", inline=False)
+    embed.add_field(name="y!punch (user)", value="DM punch the user.", inline=False)
+    embed.add_field(name="y!clear (limit)", value="Clear the specified number of messages.", inline=False)
     embed.add_field(name="?members", value="Send the server member count.", inline=False)
-    embed.add_field(name="?joke", value="Send a joke.", inline=False)
-    embed.add_field(name="?suggest (suggestion)", value="Sends a suggestion to the server staff.", inline=False)
-    embed.add_field(name="?ban (user)", value="Bans the user.", inline=False)
-    embed.add_field(name="?unban (user)", value="Unbans the user.", inline=False)
-    embed.add_field(name="?kick (user)", value="Kicks the user.", inline=False)
+    embed.add_field(name="y!joke", value="Send a joke.", inline=False)
+    embed.add_field(name="y!suggest (suggestion)", value="Sends a suggestion to the server staff.", inline=False)
+    embed.add_field(name="y!ban (user)", value="Bans the user.", inline=False)
+    embed.add_field(name="y!unban (user)", value="Unbans the user.", inline=False)
+    embed.add_field(name="y!kick (user)", value="Kicks the user.", inline=False)
     await bot.say(embed=embed)
 bot.loop.create_task(change_status())
 bot.run(os.getenv("TOKEN"))
